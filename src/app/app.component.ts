@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { TaskListComponent } from './task/task-list/task-list.component';
+import { TaskDetailComponent } from './task/task-detail/task-detail.component';
+import { TaskFormComponent } from './task/task-form/task-form.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, NavbarComponent, TaskListComponent, TaskDetailComponent, TaskFormComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
