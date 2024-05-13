@@ -1,5 +1,6 @@
 <app-navbar></app-navbar>
 <div>
-  <app-task-list></app-task-list>
-  <app-task-detail></app-task-detail>
+  <app-task-form></app-task-form>
+  <app-task-list (tareaSeleccionada)="getTask($event)"></app-task-list>
+  <app-task-detail [tareaSeleccionada]="taskSelected"></app-task-detail>
 </div>

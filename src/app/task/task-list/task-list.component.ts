@@ -1,15 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { TaskDetailComponent } from '../task-detail/task-detail.component';
+import { Task } from '../../interfaces/task';
+
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TaskDetailComponent],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css'
 })
 export class TaskListComponent {
-  tasks = [
+  //En primer lugar, creamos un evento que capture la tarea selecionada
+  @Output() tareaSeleccionada = new EventEmitter<Task>();
+
+  tasks: Task[] = [
     {
       id: 1,
       title: 'Crear Presentación',
@@ -39,4 +45,9 @@ export class TaskListComponent {
       status: 'pendiente'
     }
   ];
+
+  //Esta funcion sirve para llamar al evento y ejecutarlo
+  seleccionarTarea(task: Task): void{
+    this.tareaSeleccionada.emit(task);
+  }
 }

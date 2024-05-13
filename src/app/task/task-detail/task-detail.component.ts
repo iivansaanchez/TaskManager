@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input} from '@angular/core';
+import { Task } from '../../interfaces/task';
+
 
 @Component({
   selector: 'app-task-detail',
@@ -9,4 +11,11 @@ import { Component } from '@angular/core';
 })
 export class TaskDetailComponent {
 
+  @Input() tareaSeleccionada: Task = {
+    id: 0,
+    title: "",
+    description: "",
+    priority: "",
+    status: "",
+  };
 }
