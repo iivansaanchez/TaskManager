@@ -23,6 +23,7 @@ export class AppComponent {
     priority: "",
     status: "",
   }
+
   getTask(task: Task){
     this.taskSelected = task;
   }

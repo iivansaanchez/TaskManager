@@ -14,7 +14,7 @@ export class TaskFormComponent {
   mostrarFormulario = false;
 
   //Creamos un evento @OutPut
-  @Output() sendTask = new EventEmitter<Omit<Task, 'id'>()>;
+  @Output() sendTask = new EventEmitter<Omit<Task, 'id'>>;
 
   //Con el omit evitamos que el id se tenga eu introducir
   newTask: Omit<Task, 'id'>= {
@@ -37,8 +37,5 @@ export class TaskFormComponent {
         status: "pendiente"
       }
     }
-  }
-
-
-  
+  } 
 }

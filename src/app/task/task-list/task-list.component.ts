@@ -1,20 +1,24 @@
 import { CommonModule } from '@angular/common';
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { TaskDetailComponent } from '../task-detail/task-detail.component';
 import { Task } from '../../interfaces/task';
+import { TaskFormComponent } from '../task-form/task-form.component';
 
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [CommonModule, TaskDetailComponent],
+  imports: [CommonModule, TaskDetailComponent, TaskFormComponent],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css'
 })
 export class TaskListComponent {
   //En primer lugar, creamos un evento que capture la tarea selecionada
   @Output() tareaSeleccionada = new EventEmitter<Task>();
+  //Creamos una variable asociada al @Input con el mismo tipo que el objeto que emite el padre
+  @Input() tareaAnadida !: Omit<Task, "id">
 
+  
   tasks: Task[] = [
     {
       id: 1,
@@ -45,9 +49,28 @@ export class TaskListComponent {
       status: 'pendiente'
     }
   ];
-
+  
   //Esta funcion sirve para llamar al evento y ejecutarlo
   seleccionarTarea(task: Task): void{
     this.tareaSeleccionada.emit(task);
+  }
+
+  //Esta funcion srive para elimiar la tarea
+  deleteTask(task: Task): void{
+    for(let i = 0; i < this.tasks.length; i++){
+      let tarea = this.tasks[i];
+      if(tarea.id === task.id){
+        this.tasks.splice(i, 1);
+
+      }
+    }
+  }
+  
+  agregarTarea(task: Omit<Task, "id">){
+    const newTask: Task = {
+      id: this.tasks.length+1,
+      ...task
+    }
+    this.tasks.push(newTask);
   }
 }
