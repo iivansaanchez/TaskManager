@@ -27,4 +27,10 @@ export class AppComponent {
   getTask(task: Task){
     this.taskSelected = task;
   }
+
+  titulo = "";
+
+  obtenerBusqueda(task: string){
+    this.titulo = task;
+  }
 }

@@ -18,6 +18,8 @@ export class TaskListComponent {
   //Creamos una variable asociada al @Input con el mismo tipo que el objeto que emite el padre
   @Input() tareaAnadida !: Omit<Task, "id">
 
+  @Input() tareaBuscada !: string;
+
   
   tasks: Task[] = [
     {
@@ -65,12 +67,16 @@ export class TaskListComponent {
       }
     }
   }
-  
+
   agregarTarea(task: Omit<Task, "id">){
     const newTask: Task = {
       id: this.tasks.length+1,
       ...task
     }
     this.tasks.push(newTask);
+  }
+
+  buscarTarea(): Task[] {
+    return this.tasks.filter(task => task.title.includes(this.tareaBuscada))
   }
 }
