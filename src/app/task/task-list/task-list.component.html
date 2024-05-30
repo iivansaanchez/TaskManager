@@ -1,41 +1,39 @@
 <h1 align="center">List of Task</h1>
 <div class="container mb-3">
-    <div class="row">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3"> <!-- Columnas responsivas -->
         @for (task of tasks; track $index) {
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    @if (task.priority === 'alta') {
-                        <h2 align="center">
-                            ⛔️
-                        </h2>
-                    }@else if(task.priority === 'media'){
-                        <h2 align="center">
-                            ⚠️
-                        </h2>
-                    }@else {
-                        <h2 align="center">
-                            ✅
-                        </h2>
-                    }
-                    <h5 class="card-title" align="center">{{task.title}}</h5>
-                    <p class="card-text" align="center">{{task.description}}</p>
-                    @if (task.status === 'completada') {
-                        <p class="card-text" align="center" class="bg-success-subtle">{{task.status}}</p>
-                    }@else if (task.status === 'en progreso') {
-                        <p class="card-text" align="center" class="bg-warning-subtle">{{task.status}}</p>
-                    }@else {
-                        <p class="card-text" align="center" class="bg-danger-subtle">{{task.status}}</p>
-                    }
-                
-                    <button class="btn btn-primary" (click)="seleccionarTarea(task)">View Detail</button>
+            <div class="col mb-5"> <!-- Columna con margen -->
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        @if (task.priority === 'alta') {
+                            <h2 align="center">⛔️</h2>
+                        }@else if(task.priority === 'media'){
+                            <h2 align="center">⚠️</h2>
+                        }@else {
+                            <h2 align="center">✅</h2>
+                        }
+                        <h5 class="card-title" align="center">{{task.title}}</h5>
+                        <p class="card-text" align="center">{{task.description}}</p>
+                        @if (task.status === 'completada') {
+                            <p class="card-text" align="center" class="bg-success-subtle">{{task.status}}</p>
+                        }@else if (task.status === 'en progreso') {
+                            <p class="card-text" align="center" class="bg-warning-subtle">{{task.status}}</p>
+                        }@else {
+                            <p class="card-text" align="center" class="bg-danger-subtle">{{task.status}}</p>
+                        }
 
-                    <button class="btn btn-danger" (click)="deleteTask(task)">Delete</button>
+                        <div class="d-flex justify-content-between mt-3">
+                            <button class="btn btn-primary" (click)="seleccionarTarea(task)">View Detail</button>
+                            <button class="btn btn-danger" (click)="deleteTask(task)">Delete</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         }
     </div>
-    <div>
-        <router-outlet></router-outlet>
-    </div>
+    @if(taskSelected){
+        <div>
+            <app-task-detail [tareaSeleccionada]="taskSelected"></app-task-detail>
+        </div>
+    }
 </div>
-

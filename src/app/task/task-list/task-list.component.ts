@@ -18,12 +18,14 @@ export class TaskListComponent {
   //En el constructor añadimos router para usarlo luego en la funcion de navegacion
   constructor(private router: Router) {}
 
-  //En primer lugar, creamos un evento que capture la tarea selecionada
-  @Output() tareaSeleccionada = new EventEmitter<Task>();
+  //Creamos la tareaSeleccionada para luego modificarla
+  taskSelected !: Task ;
   
   //Esta funcion sirve para llamar al evento y ejecutarlo
   seleccionarTarea(task: Task): void{
-    this.tareaSeleccionada.emit(task);
+    //Igualamos la tarea seleccioanda con la seleccionada
+    this.taskSelected = task;
+    //Navegamos a task con el id de la tarea
     this.router.navigate(['/tasks', task.id]);
   }
 
