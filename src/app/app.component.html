@@ -1,5 +1,4 @@
-<app-navbar (busqueda)="obtenerBusqueda($event)"></app-navbar>
+<app-navbar></app-navbar>
 <div>
-  <app-task-list (tareaSeleccionada)="getTask($event)" [tareaBuscada]="titulo"></app-task-list>
-  <app-task-detail [tareaSeleccionada]="taskSelected"></app-task-detail>
+  <router-outlet></router-outlet>
 </div>

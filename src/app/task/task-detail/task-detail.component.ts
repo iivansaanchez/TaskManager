@@ -11,11 +11,5 @@ import { Task } from '../../interfaces/task';
 })
 export class TaskDetailComponent {
 
-  @Input() tareaSeleccionada: Task = {
-    id: 0,
-    title: "",
-    description: "",
-    priority: "",
-    status: "",
-  };
+  @Input() tareaSeleccionada !: Task
 }

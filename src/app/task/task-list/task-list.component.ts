@@ -3,18 +3,30 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { TaskDetailComponent } from '../task-detail/task-detail.component';
 import { Task } from '../../interfaces/task';
 import { TaskFormComponent } from '../task-form/task-form.component';
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
+import { Router, RouterOutlet } from '@angular/router';
 
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [CommonModule, TaskDetailComponent, TaskFormComponent],
+  imports: [CommonModule, TaskDetailComponent, TaskFormComponent, NavbarComponent, RouterOutlet],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css'
 })
 export class TaskListComponent {
+  //En el constructor añadimos router para usarlo luego en la funcion de navegacion
+  constructor(private router: Router) {}
+
   //En primer lugar, creamos un evento que capture la tarea selecionada
   @Output() tareaSeleccionada = new EventEmitter<Task>();
+  
+  //Esta funcion sirve para llamar al evento y ejecutarlo
+  seleccionarTarea(task: Task): void{
+    this.tareaSeleccionada.emit(task);
+    this.router.navigate(['/tasks', task.id]);
+  }
+
   //Creamos una variable asociada al @Input con el mismo tipo que el objeto que emite el padre
   @Input() tareaAnadida !: Omit<Task, "id">
 
@@ -52,10 +64,6 @@ export class TaskListComponent {
     }
   ];
   
-  //Esta funcion sirve para llamar al evento y ejecutarlo
-  seleccionarTarea(task: Task): void{
-    this.tareaSeleccionada.emit(task);
-  }
 
   //Esta funcion srive para elimiar la tarea
   deleteTask(task: Task): void{

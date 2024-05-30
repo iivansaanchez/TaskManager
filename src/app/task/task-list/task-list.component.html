@@ -1,8 +1,7 @@
-<app-task-form (sendTask)="agregarTarea($event)"></app-task-form>
 <h1 align="center">List of Task</h1>
 <div class="container mb-3">
     <div class="row">
-        @for (task of buscarTarea(); track $index) {
+        @for (task of tasks; track $index) {
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     @if (task.priority === 'alta') {
@@ -28,12 +27,15 @@
                         <p class="card-text" align="center" class="bg-danger-subtle">{{task.status}}</p>
                     }
                 
-                    <a href="#" class="btn btn-primary" (click)="seleccionarTarea(task)">View Detail</a>
+                    <button class="btn btn-primary" (click)="seleccionarTarea(task)">View Detail</button>
 
-                    <a href="#" class="btn btn-danger" (click)="deleteTask(task)">Delete</a>
+                    <button class="btn btn-danger" (click)="deleteTask(task)">Delete</button>
                 </div>
             </div>
         }
+    </div>
+    <div>
+        <router-outlet></router-outlet>
     </div>
 </div>
 
