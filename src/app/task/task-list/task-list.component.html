@@ -1,9 +1,9 @@
-<h1 align="center">List of Task</h1>
-<div class="container mb-3">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3"> <!-- Columnas responsivas -->
-        @for (task of tasks; track $index) {
-            <div class="col mb-5"> <!-- Columna con margen -->
-                <div class="card" style="width: 18rem;">
+<app-search-bar (busqueda)="searchWord($event)" class="row mt-5"></app-search-bar>
+<div class="container mt-3">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+        @for (task of buscarTarea(); track $index) {
+            <div class="col mt-3">
+                <div class="card row mb-5" style="width: 18rem;">
                     <div class="card-body">
                         @if (task.priority === 'alta') {
                             <h2 align="center">⛔️</h2>

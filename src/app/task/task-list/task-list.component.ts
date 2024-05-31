@@ -3,14 +3,14 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { TaskDetailComponent } from '../task-detail/task-detail.component';
 import { Task } from '../../interfaces/task';
 import { TaskFormComponent } from '../task-form/task-form.component';
-import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { Router, RouterOutlet } from '@angular/router';
+import { SearchBarComponent } from '../../search-bar/search-bar.component';
 
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [CommonModule, TaskDetailComponent, TaskFormComponent, NavbarComponent, RouterOutlet],
+  imports: [CommonModule, TaskDetailComponent, TaskFormComponent, SearchBarComponent, RouterOutlet],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css'
 })
@@ -32,9 +32,13 @@ export class TaskListComponent {
   //Creamos una variable asociada al @Input con el mismo tipo que el objeto que emite el padre
   @Input() tareaAnadida !: Omit<Task, "id">
 
-  @Input() tareaBuscada !: string;
+  @Input() tareaBuscada = '';
 
-  
+  //Creamos una funcion que pinte la palabra buscada
+  searchWord(word: string){
+    this.tareaBuscada = word;
+  }
+
   tasks: Task[] = [
     {
       id: 1,
